@@ -1,0 +1,109 @@
+/* Estilo da barra lateral */
+.sidebar {
+    background-color: #27DB8F;
+    height: 100vh;
+    background-image: url("/static/autenticacao/img/fundo_background.png");
+    background-size: cover;
+    background-position: center;
+    padding: 20px; /* Adiciona um pouco de padding para um melhor espaçamento interno */
+}
+
+/* Estilo do logo na barra lateral */
+.logo_sidebar {
+    text-align: center;
+}
+
+.img_logo_sidebar {
+    width: 80%; /* Ajusta a largura da imagem do logo */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Área de cadastro */
+.area_cadastrar {
+    margin-top: 8%;
+    margin-left: 15%;
+    width: 70%;
+}
+
+/* Estilo do título */
+.titulo {
+    font-weight: bold;
+    font-size: 24px; /* Ajusta o tamanho da fonte para o título */
+}
+
+/* Estilo do subtítulo */
+.sub-titulo {
+    color: gray;
+    font-size: 18px; /* Ajusta o tamanho da fonte para o subtítulo */
+}
+
+/* Estilo dos campos de formulário */
+.input-form {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px; /* Aumenta o padding para mais conforto */
+    outline: 0;
+    border: 1px solid #ddd; /* Adiciona uma borda sutil ao redor dos campos */
+    border-radius: 5px; /* Adiciona bordas arredondadas */
+}
+
+/* Estilo do campo de formulário ao focar */
+.input-form:focus {
+    border: 2px solid #27DB8F !important;
+    outline: 0 !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important; /* Adiciona uma leve sombra ao focar */
+}
+
+/* Estilo do texto em negrito */
+.bold {
+    font-weight: bold;
+}
+
+/* Estilo do botão de registro */
+.btn-first {
+    border: none;
+    padding: 10px 20px; /* Ajusta o padding para mais conforto */
+    font-size: 18px; /* Ajusta o tamanho da fonte para o botão */
+    background-color: #27DB8F;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: all 0.3s ease; /* Transição suave para interações */
+    text-align: center;
+    display: inline-block;
+}
+
+/* Estilo do botão de login */
+.btn.btn-outline-success.btn-lg {
+    margin-top: 80px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-align: center;
+    display: inline-block;
+    border: 2px solid #27DB8F;
+    color: #27DB8F;
+    background-color: transparent;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo do botão de login ao passar o mouse e focar */
+.btn.btn-outline-success.btn-lg:hover,
+.btn.btn-outline-success.btn-lg:focus {
+    background-color: #27DB8F;
+    color: white;
+    border-color: #27DB8F;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+/* Estilo do botão de login ao ser pressionado */
+.btn.btn-outline-success.btn-lg:active {
+    background-color: #1a9c6f;
+    border-color: #1a9c6f;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}

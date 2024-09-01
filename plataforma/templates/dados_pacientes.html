@@ -1,0 +1,253 @@
+{% extends 'base_plataforma.html' %}
+{% load static %}
+
+{% block plataforma %}
+  {% if messages %}
+    <br />
+    {% for message in messages %}
+      <div class="alert {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  <br />
+
+  <div class="row">
+    <div class="col-md-3">
+      {% if paciente.sexo == 'M' %}
+        <img src="{% static 'plataforma/img/perfil2.png' %}" />
+      {% else %}
+        <img src="{% static 'plataforma/img/perfil1.png' %}" />
+      {% endif %}
+    </div>
+    <div class="col-md-3 dados descricao">
+      <h4>{{ paciente.nome }}</h4>
+      <h6>{{ paciente.idade }} Anos</h6>
+    </div>
+  </div>
+  <hr />
+
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal">Adicionar dados do paciente</button>
+  <br /><br />
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Peso</th>
+        <th scope="col">Altura</th>
+        <th scope="col">% Gordura</th>
+        <th scope="col">% Músculo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dado in dados_pacientes %}
+        <tr>
+          <th scope="row">{{ dado.peso }} KG</th>
+          <td>{{ dado.altura }} cm</td>
+          <td>{{ dado.gordura }}%</td>
+          <td>{{ dado.musculo }}%</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div style="
+  width: 80%; /* Largura do contêiner ajustada para 80% da largura do elemento pai */
+  max-width: 1200px; /* Define a largura máxima do contêiner para evitar que fique muito largo */
+  margin: 20px auto; /* Adiciona margem de 20px em cima e embaixo, e centraliza horizontalmente */
+  padding: 20px; /* Adiciona um espaçamento interno de 20px */
+  box-sizing: border-box; /* Inclui o padding e a borda na largura total do contêiner */
+  display: flex; /* Utiliza Flexbox para controle de layout */
+  justify-content: center; /* Centraliza horizontalmente o canvas dentro do contêiner */
+  align-items: center; /* Alinha o canvas verticalmente no centro do contêiner */
+  background-color: #f9f9f9; /* Cor de fundo leve para destacar o gráfico */
+  border-radius: 8px; /* Bordas arredondadas para um visual mais suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidade */
+">
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/grafico_peso/{{paciente.id}}/', {
+        method: 'POST'
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Erro na rede: ${response.statusText}`)
+          }
+          return response.json()
+        })
+        .then((data_paciente) => {
+          const data = {
+            labels: data_paciente.labels,
+            datasets: [
+              {
+                label: 'Peso do paciente',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Cor de fundo com transparência
+                borderColor: 'rgb(255, 99, 132)', // Cor da borda do gráfico
+                borderWidth: 2, // Largura da borda
+                data: data_paciente.peso
+              }
+            ]
+          }
+    
+          const config = {
+            type: 'line',
+            data: data,
+            options: {
+              responsive: true, // Torna o gráfico responsivo
+              plugins: {
+                legend: {
+                  position: 'top' // Posição da legenda
+                },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `${context.dataset.label}: ${context.raw}`
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Tempo' // Título do eixo x
+                  }
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Peso (kg)' // Título do eixo y
+                  }
+                }
+              },
+              animation: {
+                duration: 1000, // Duração da animação em milissegundos
+                easing: 'easeOutBounce' // Tipo de animação
+              }
+            }
+          }
+    
+          new Chart(document.getElementById('myChart').getContext('2d'), config)
+        })
+        .catch((error) => {
+          console.error('Erro ao carregar os dados do gráfico:', error)
+          alert('Erro ao carregar os dados do gráfico. Por favor, tente novamente mais tarde.')
+        })
+    })
+  </script>
+
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'dados_paciente' paciente.id %}" method="POST">
+            {% csrf_token %}
+            <h4 class="titulo">Dados do paciente</h4>
+
+            <!-- Campos de Dados do Paciente -->
+            <div class="form-row">
+              <div class="col-md">
+                <label for="validationServerUsername">Peso</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="--" name="peso" />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">Kg</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <label for="validationServerUsername">Altura</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="--" name="altura" />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">cm</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <!-- Campos de Percentual -->
+            <div class="form-row">
+              <div class="col-md">
+                <label for="validationServerUsername">Percentual de gordura</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="--" name="gordura" />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <label for="validationServerUsername">Percentual de músculo</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="--" name="musculo" />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <h4 class="titulo">Dados laboratoriais</h4>
+
+            <!-- Campos de Dados Laboratoriais -->
+            <div class="form-row">
+              <div class="col-md">
+                <label for="validationServerUsername">Colesterol HDL</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="--" name="hdl" />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <label for="validationServerUsername">Colesterol LDL</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="--" name="ldl" />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <div class="form-row">
+              <div class="col-md">
+                <label for="validationServerUsername">Colesterol total</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="--" name="ctotal" />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <label for="validationServerUsername">Triglicerídios</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="--" name="trigliceridos" />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend3">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <input type="submit" value="Cadastrar" class="btn btn-success" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

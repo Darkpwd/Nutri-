@@ -1,0 +1,94 @@
+.sidebar {
+    background-color: #27DB8F;
+    height: 100vh;
+    background-image: url("/static/autenticacao/img/fundo_background.png");
+    background-size: cover; /* Ajusta o tamanho da imagem de fundo */
+    background-position: center; /* Centraliza a imagem de fundo */
+    background-repeat: no-repeat; /* Impede a repetição da imagem de fundo */
+    border: none; /* Remove qualquer borda */
+    margin: 0; /* Remove margens */
+    padding: 0; /* Remove preenchimentos */
+}
+
+
+.logo_sidebar {
+    text-align: center;
+}
+
+.img_logo_sidebar {
+    width: 100%;
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+.area_cadastrar {
+    margin-top: 8%;
+    margin-left: 15%;
+    width: 70%;
+}
+
+.titulo {
+    font-weight: bold;
+}
+
+.sub-titulo {
+    color: gray;
+}
+
+.input-form {
+    margin-top: 15px;
+    width: 100%;
+    padding: 5px;
+    outline: 0;
+}
+
+.input-form:focus {
+    border: 2px solid #27DB8F !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.btn-first {
+    border: none;
+    padding: 5px 15px;
+    font-size: 25px;
+    background-color: #27DB8F;
+    color: white;
+    font-weight: bold;
+    cursor: pointer; /* Adiciona um cursor de ponteiro para botões */
+    border-radius: 15px;
+}
+
+.btn.btn-outline-success.btn-lg {
+    margin-top: 80px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-align: center;
+    display: inline-block;
+    border: 2px solid #27DB8F;
+    color: #27DB8F;
+    background-color: transparent;
+    text-decoration: none; /* Remove o sublinhado, se houver */
+    transition: all 0.3s ease;
+    cursor: pointer; /* Adiciona o cursor de ponteiro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve */
+}
+
+.btn.btn-outline-success.btn-lg:hover,
+.btn.btn-outline-success.btn-lg:focus {
+    background-color: #27DB8F; /* Cor de fundo ao passar o mouse */
+    color: white; /* Muda a cor do texto para branco */
+    border-color: #27DB8F; /* Mantém a cor da borda igual à cor de fundo */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Intensifica a sombra */
+    text-decoration: none; /* Remove o sublinhado do link */
+}
+
+.btn.btn-outline-success.btn-lg:active {
+    background-color: #1a9c6f; /* Cor de fundo quando pressionado */
+    border-color: #1a9c6f; /* Mantém a cor da borda */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ajusta a sombra para o estado ativo */
+}

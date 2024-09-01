@@ -1,0 +1,40 @@
+/* Define a cor de fundo e o espaçamento geral */
+.fundo-alimentar {
+    background-color: #f4f4f4; /* Cor de fundo mais clara para um visual mais suave */
+    padding: 40px; /* Ajuste do espaçamento para uma melhor aparência */
+    border-radius: 8px; /* Bordas arredondadas para um visual mais moderno */
+}
+
+/* Estilo para a seção de refeição */
+.refeicao {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra mais suave e moderna */
+    border-radius: 8px; /* Bordas arredondadas para consistência */
+    background-color: #ffffff; /* Cor de fundo branca para contraste */
+    margin-bottom: 20px; /* Espaçamento inferior para separação */
+}
+
+/* Cabeçalho da refeição */
+.head-refeicao {
+    background-color: #e0e0e0; /* Cor de fundo mais clara para o cabeçalho */
+    padding: 20px; /* Ajuste do espaçamento */
+    font-weight: bold;
+    border-top-left-radius: 8px; /* Bordas arredondadas apenas no topo */
+    border-top-right-radius: 8px;
+}
+
+/* Corpo da refeição */
+.body-refeicao {
+    padding: 20px; /* Ajuste do espaçamento */
+    background-color: #ffffff; /* Cor de fundo branca para o corpo */
+    border-bottom-left-radius: 8px; /* Bordas arredondadas apenas na parte inferior */
+    border-bottom-right-radius: 8px;
+}
+
+/* Opção dentro da refeição */
+.opcao {
+    background-color: #e0e0e0; /* Cor de fundo mais clara para as opções */
+    padding: 15px;
+    border-radius: 4px; /* Bordas arredondadas para um visual mais suave */
+    margin-top: 10px; /* Espaçamento superior para separação entre opções */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave para as opções */
+}

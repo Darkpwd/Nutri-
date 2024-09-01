@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'autenticacao/css/login.css' %}" />
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+{% endblock %}
+
+{% block titulo %}
+  NUTRI+ | Login
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 sidebar">
+        <div class="logo_sidebar">
+          <h2 class="logo"><img class="img_logo_sidebar" src="{% static 'autenticacao/img/nutri_lab.jpg' %}" alt="Logo Nutri" /></h2>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div class="area_cadastrar">
+          {% if messages %}
+            <br />
+            {% for message in messages %}
+              <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+          <h2 class="titulo">Seja bem-vindo</h2>
+          <p class="sub-titulo">Entre com sua conta</p>
+          <hr />
+
+          <form action="{% url 'logar' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label class="bold" for="usuario">Nome de usuário</label>
+              <input class="form-control input-form" id="usuario" name="usuario" type="text" placeholder="Digite seu nome..." required />
+            </div>
+            <div class="form-group">
+              <label class="bold" for="senha">Senha</label>
+              <input class="form-control input-form" id="senha" name="senha" type="password" placeholder="Digite sua senha..." required />
+            </div>
+            <button class="btn-first">Logar</button>
+          </form>
+
+          <div class="signup-prompt">
+            <h3>
+              Não tem uma conta?&nbsp;
+              <a class="btn btn-outline-success btn-lg" href="{% url 'cadastro' %}">Registre-se</a>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base_plataforma.html' %}
+{% load static %}
+
+{% block plataforma %}
+  <link rel="stylesheet" href="{% static 'plataforma/css/card.css' %}" />
+
+  {% comment %}Bloco para exibir minhas mensagens{% endcomment %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for message in messages %}
+        <div class="alert {{ message.tags }}" role="alert">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% comment %}Botão para exibir o cadastro dos pacientes{% endcomment %}
+  <button type="button" class="btn btn-outline-success mt-3" data-toggle="modal" data-target="#modal">Novo paciente</button>
+
+  {% comment %}Exibição dos pacientes{% endcomment %}
+  <div class="row mt-4">
+    {% for paciente in pacientes %}
+      <div class="col-md-4 mb-4">
+        <a href="#" class="link-hover">
+          <div class="card-paciente">
+            <div class="foto-perfil">
+              {% if paciente.sexo == 'M' %}
+                <img src="{% static 'plataforma/img/perfil2.png' %}" alt="Foto do paciente" />
+              {% else %}
+                <img src="{% static 'plataforma/img/perfil1.png' %}" alt="Foto do paciente" />
+              {% endif %}
+            </div>
+            <p class="dados">{{ paciente.nome }}</p>
+            <p class="dados">{{ paciente.idade }} Anos</p>
+            <p class="dados">{{ paciente.email }}</p>
+          </div>
+        </a>
+      </div>
+    {% empty %}
+      <div class="col-md-12">
+        <p class="dados">Nenhum paciente cadastrado.</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% comment %}Modal{% endcomment %}
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title titulo" id="exampleModalLabel">Cadastrar paciente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'pacientes' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-3">
+                <img src="{% static 'plataforma/img/perfil2.png' %}" alt="Foto do paciente" />
+              </div>
+              <div class="col-md-9">
+                <label>Nome:</label>
+                <input type="text" placeholder="Digite o nome do paciente..." class="form-control" name="nome" />
+              </div>
+            </div>
+            <label>Sexo:</label>
+            <select name="sexo" class="form-control">
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+            </select>
+            <label>Idade:</label>
+            <input type="number" placeholder="0" class="form-control" name="idade" />
+            <label>E-mail:</label>
+            <input type="email" placeholder="exemplo@email.com" class="form-control" name="email" />
+            <label>Telefone:</label>
+            <input type="text" placeholder="+55 (00) 00000-0000" class="form-control" name="telefone" />
+            <input type="submit" class="btn btn-success btn-lg mt-3" value="Registar" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
