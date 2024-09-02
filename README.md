@@ -22,11 +22,5 @@ To get started with Nutri+, follow these steps:
    cd Nutri+
    pip install -r requirements.txt
    python manage.py runserver
-Open your web browser and navigate to http://127.0.0.1:8000/ to start using Nutri+.
-
-
-
-
-
 
 ![project](https://github.com/user-attachments/assets/b7a652ca-905c-4815-a941-19a87a3f7109)
