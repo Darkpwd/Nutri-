@@ -27,7 +27,8 @@ SECRET_KEY = "django-insecure-ahxyl=*(k2w6u-h$z@zi=qj&px1$yx&su@$_$lr!atv6mophh9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['.render.com', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
@@ -146,5 +147,5 @@ MESSAGE_TAGS = {
 
 #Email
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST_USER = "gustavosantana559@email.com"
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", 'django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "gustavosantana559@email.com")
