@@ -24,3 +24,5 @@ To get started with Nutri+, follow these steps:
    python manage.py runserver
 
 ![project](https://github.com/user-attachments/assets/b7a652ca-905c-4815-a941-19a87a3f7109)
+
+https://darkpwd.pythonanywhere.com/auth/logar/
